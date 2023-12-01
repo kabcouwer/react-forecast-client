@@ -1,21 +1,21 @@
-import axios from "./axios";
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import theme from "./styles/theme";
+import Home from "./views/Home";
 
-function App() {
-  const [result, setResult] = useState("");
-
-  useEffect(() => {
-    axios.get("api/hello").then((response) => {
-      setResult(response.data);
-    });
-  }, []);
-  
+const App = () => {
   return (
-    <div className="App">
-      {result && <h1>{result}</h1>}
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Routes>
+          {/* Define your routes */}
+          <Route path="/" exact element={ <Home />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
